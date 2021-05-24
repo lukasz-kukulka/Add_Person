@@ -1,0 +1,68 @@
+#pragma once
+#include <vector>
+
+#include "Person.hpp"
+
+class RecordApp{
+
+public:
+    void startApp();
+
+    enum class MenuOption {
+        add = 1,
+        search,
+        exit
+    };
+
+    enum class ChooseMenu {
+        name = 1,
+        otherNames,
+        mail,
+        tel,
+        street,
+        town,
+        country
+    };
+    
+private:
+    void printMenu();
+    void menuAction();
+    void addPerson();
+
+    void addName();
+    void addOtherNames();
+    void addEmail();
+    void addTelephoneNumber();
+    void addAddress();
+    void addStreet();
+    void addTown();
+    void addCountry();
+
+    bool validName();
+    bool validOtherNames();
+    bool validEmail();
+    bool validTelephoneNumber();
+    bool validStreet();
+    bool validTown();
+    bool validCountry();
+
+    void saveToFile();
+    void loadFromFile();
+    int countRecord();
+    int searchCandidate(std::string);
+    void printSearchMenu();
+    void menuActionSearch();
+
+    std::vector<Person>person_;
+    MenuOption menuOption_ { MenuOption::add };
+    ChooseMenu menuChooseOption_ { ChooseMenu::name };
+    int optionMenu_ { 0 };
+    std::string firstName_;
+    std::string otherNames_;
+    std::string email_;
+    std::string tel_;
+    std::string street_;
+    std::string town_;
+    std::string country_;
+    bool exit_ { false };
+};
