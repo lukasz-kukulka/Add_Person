@@ -55,9 +55,15 @@ private:
     int countRecord();
     void printSearchMenu();
     void menuActionSearch();
-    void insertValureToSearch();
+    void insertValueToSearch();
 
     void searchByName(std::string);
+    void searchByOtherNames(std::string);
+    void searchByEmail(std::string);
+    void searchByTel(std::string);
+    void searchByStreet(std::string);
+    void searchByTown(std::string);
+    void searchByCountry(std::string);
 
     std::vector<Person>person_;
     std::vector<Person>searchResult_;

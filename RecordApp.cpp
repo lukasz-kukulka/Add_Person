@@ -277,24 +277,32 @@ void RecordApp::menuActionSearch(){
         {
             case ChooseMenu::name : { 
                 whatKindSearch = "name";
+                insertValueToSearch();
+                searchByName(insertValueToFind);
             } break;
             case ChooseMenu::otherNames : {
-            
+                whatKindSearch = "other names";
+                insertValueToSearch();
             } break;
             case ChooseMenu::mail : {
-                
+                whatKindSearch = "email";
+                insertValueToSearch();
             } break;
             case ChooseMenu::tel : {
-                
+                whatKindSearch = "telephone number";
+                insertValueToSearch();
             } break;
             case ChooseMenu::street : {
-                
+                whatKindSearch = "street";
+                insertValueToSearch();
             } break;
             case ChooseMenu::town : {
-                
+                whatKindSearch = "town";
+                insertValueToSearch();
             } break;
             case ChooseMenu::country : {
-                
+                whatKindSearch = "country";
+                insertValueToSearch();
             } break;
             default : {
             
@@ -305,7 +313,7 @@ void RecordApp::menuActionSearch(){
 
 }
 
-void RecordApp::insertValureToSearch(){
+void RecordApp::insertValueToSearch(){
     do{
         std::cout << "Search by "<< whatKindSearch << ". Please insert value to search ";
         std::cin >> insertValueToFind;
