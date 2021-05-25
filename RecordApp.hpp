@@ -21,7 +21,8 @@ public:
         tel,
         street,
         town,
-        country
+        country,
+        exit
     };
     
 private:
@@ -78,6 +79,7 @@ private:
     std::string town_;
     std::string country_;
     bool exit_ { false };
+    bool exitFromSearch_ { false };
     std::string whatKindSearch { "" };
     std::string insertValueToFind { "" };
 };

@@ -263,12 +263,14 @@ void RecordApp::printSearchMenu(){
     std::cout << "| 5. Street                        |\n";
     std::cout << "| 6. Town                          |\n";
     std::cout << "| 7. Country                       |\n";
+    std::cout << "| 8. Back to menu                  |\n";
     std::cout << "|                                  |\n";
     std::cout << " ----------------------------------\n";
 }
 
 void RecordApp::menuActionSearch(){
     do{
+        exitFromSearch_ = false;
         std::cout << "CHOOSE YOUR OPTION: ";
         std::cin >> optionMenu_;
         menuChooseOption_ = static_cast<RecordApp::ChooseMenu>(optionMenu_);
@@ -304,12 +306,15 @@ void RecordApp::menuActionSearch(){
                 whatKindSearch = "country";
                 insertValueToSearch();
             } break;
+            case ChooseMenu::exit : {
+                exitFromSearch_ = true;
+            } break;
             default : {
-            
+                
             } break;
         }
 
-    } while (exit_ == true);
+    } while (exitFromSearch_ == true);
 
 }
 
@@ -322,6 +327,7 @@ void RecordApp::insertValueToSearch(){
 }
 
 void RecordApp::searchByName(std::string name){
+    searchResult_.clear();
     for (auto const& element : person_){
         if (element.getFirstName() == name){
             searchResult_.push_back(Person(element));
@@ -329,3 +335,11 @@ void RecordApp::searchByName(std::string name){
     }
 }
 
+void RecordApp::searchByOtherNames(std::string otherNames){
+    searchResult_.clear();
+    for (auto const& element : person_){
+        if (element.getOthersName() == otherNames){
+            searchResult_.push_back(Person(element));
+        }
+    }
+}
