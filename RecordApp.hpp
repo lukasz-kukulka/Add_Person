@@ -48,13 +48,14 @@ private:
     bool validStreet();
     bool validTown();
     bool validCountry();
+    bool validValueToFind();
 
     void saveToFile(int);
     void loadFromFile();
     int countRecord();
-    int searchCandidate(std::string);
     void printSearchMenu();
     void menuActionSearch();
+    void insertValureToSearch();
 
     void searchByName(std::string);
 
@@ -71,4 +72,6 @@ private:
     std::string town_;
     std::string country_;
     bool exit_ { false };
+    std::string whatKindSearch { "" };
+    std::string insertValueToFind { "" };
 };

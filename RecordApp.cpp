@@ -69,11 +69,11 @@ void RecordApp::addPerson(){
     addTelephoneNumber();
     addAddress();
     person_.push_back(Person(firstName_, otherNames_, email_, tel_, street_, town_, country_));
-    //saveToFile();
 }
 
 void RecordApp::searchPerson(){
-
+    printSearchMenu();
+    menuActionSearch();
 }
 
 void RecordApp::exitApp(){
@@ -183,6 +183,11 @@ bool RecordApp::validCountry(){
     return true;
 }
 
+bool RecordApp::validValueToFind(){
+    //TO DO
+    return true;
+}
+
 
 void RecordApp::saveToFile(int index){
     std::fstream file;
@@ -246,19 +251,6 @@ int RecordApp::countRecord(){
 	return lineNo / 9;
 }
 
-int RecordApp::searchCandidate(std::string value){
-    std::string searchPerson = "";
-    std::cout << "Insert value: ";
-    std::cin >> searchPerson;
-    searchPerson = value;
-    // for (auto const& ele : person_){
-    //     if (value == 1){
-
-    //     }
-    // }
-    return 0;
-}
-
 void RecordApp::printSearchMenu(){
     std::cout << " ---------------------------------- \n";
     std::cout << "|      Criteria of serching:       |\n";
@@ -284,7 +276,7 @@ void RecordApp::menuActionSearch(){
         switch (menuChooseOption_)
         {
             case ChooseMenu::name : { 
-
+                whatKindSearch = "name";
             } break;
             case ChooseMenu::otherNames : {
             
@@ -311,6 +303,14 @@ void RecordApp::menuActionSearch(){
 
     } while (exit_ == true);
 
+}
+
+void RecordApp::insertValureToSearch(){
+    do{
+        std::cout << "Search by "<< whatKindSearch << ". Please insert value to search ";
+        std::cin >> insertValueToFind;
+    } while (validValueToFind() == false);
+    
 }
 
 void RecordApp::searchByName(std::string name){
