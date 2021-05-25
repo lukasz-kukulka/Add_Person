@@ -351,3 +351,12 @@ void RecordApp::searchByEmail(std::string email){
         }
     }
 }
+
+void RecordApp::searchByTel(std::string tel){
+    searchResult_.clear();
+    for (auto const& element : person_){
+        if (element.getEmail() == tel){
+            searchResult_.push_back(Person(element));
+        }
+    }
+}

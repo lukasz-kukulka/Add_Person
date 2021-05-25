@@ -7,12 +7,14 @@ Implemented
 - save to file
 - load from file
 - search menu
-- search action(only function)
+- search action
+- search action algorithms - I tried wit 1.000.000 records, and worked without problems
+- search algorithms
 
 Not implemented
-- search action algorithms
 - validation value
-- search algorithms
+- print search results
+- delete person
 
 Future
 - optimize search algorithms
