@@ -284,26 +284,32 @@ void RecordApp::menuActionSearch(){
             case ChooseMenu::otherNames : {
                 whatKindSearch = "other names";
                 insertValueToSearch();
+                searchByOtherNames(insertValueToFind);
             } break;
             case ChooseMenu::mail : {
                 whatKindSearch = "email";
                 insertValueToSearch();
+                searchByEmail(insertValueToFind);
             } break;
             case ChooseMenu::tel : {
                 whatKindSearch = "telephone number";
                 insertValueToSearch();
+                searchByTel(insertValueToFind);
             } break;
             case ChooseMenu::street : {
                 whatKindSearch = "street";
                 insertValueToSearch();
+                searchByStreet(insertValueToFind);
             } break;
             case ChooseMenu::town : {
                 whatKindSearch = "town";
                 insertValueToSearch();
+                searchByTown(insertValueToFind);
             } break;
             case ChooseMenu::country : {
                 whatKindSearch = "country";
                 insertValueToSearch();
+                searchByCountry(insertValueToFind);
             } break;
             case ChooseMenu::exit : {
                 exitFromSearch_ = true;
