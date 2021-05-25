@@ -355,7 +355,16 @@ void RecordApp::searchByEmail(std::string email){
 void RecordApp::searchByTel(std::string tel){
     searchResult_.clear();
     for (auto const& element : person_){
-        if (element.getEmail() == tel){
+        if (element.getTel() == tel){
+            searchResult_.push_back(Person(element));
+        }
+    }
+}
+
+void RecordApp::searchByStreet(std::string street){
+    searchResult_.clear();
+    for (auto const& element : person_){
+        if (element.getStreet() == street){
             searchResult_.push_back(Person(element));
         }
     }
