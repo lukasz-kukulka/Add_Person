@@ -271,10 +271,9 @@ void RecordApp::printSearchMenu(){
 void RecordApp::menuActionSearch(){
     do{
         exitFromSearch_ = false;
-        std::cout << "CHOOSE YOUR OPTION: ";
+        std::cout << "CHOOSE WITH KIND SEARCH YOU WILL USE: ";
         std::cin >> optionMenu_;
         menuChooseOption_ = static_cast<RecordApp::ChooseMenu>(optionMenu_);
-
         switch (menuChooseOption_)
         {
             case ChooseMenu::name : { 
@@ -339,6 +338,15 @@ void RecordApp::searchByOtherNames(std::string otherNames){
     searchResult_.clear();
     for (auto const& element : person_){
         if (element.getOthersName() == otherNames){
+            searchResult_.push_back(Person(element));
+        }
+    }
+}
+
+void RecordApp::searchByEmail(std::string email){
+    searchResult_.clear();
+    for (auto const& element : person_){
+        if (element.getEmail() == email){
             searchResult_.push_back(Person(element));
         }
     }
