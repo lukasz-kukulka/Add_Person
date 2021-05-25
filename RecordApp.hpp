@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <map>
 
 #include "Person.hpp"
 
@@ -66,8 +67,11 @@ private:
     void searchByTown(std::string);
     void searchByCountry(std::string);
 
+    void printSearchPersons();
+
     std::vector<Person>person_;
-    std::vector<Person>searchResult_;
+    //std::vector<Person>searchResult_;
+    std::map<int, Person>searchResult_;
     MenuOption menuOption_ { MenuOption::add };
     ChooseMenu menuChooseOption_ { ChooseMenu::name };
     int optionMenu_ { 0 };
@@ -80,6 +84,7 @@ private:
     std::string country_;
     bool exit_ { false };
     bool exitFromSearch_ { false };
-    std::string whatKindSearch { "" };
-    std::string insertValueToFind { "" };
+    std::string whatKindSearch_ { "" };
+    std::string insertValueToFind_ { "" };
+    int iterator_ { 0 };
 };

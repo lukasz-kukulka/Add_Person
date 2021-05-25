@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 
 #include "RecordApp.hpp"
 
@@ -277,43 +278,43 @@ void RecordApp::menuActionSearch(){
         switch (menuChooseOption_)
         {
             case ChooseMenu::name : { 
-                whatKindSearch = "name";
+                whatKindSearch_ = "name";
                 insertValueToSearch();
-                searchByName(insertValueToFind);
+                searchByName(insertValueToFind_);
             } break;
             case ChooseMenu::otherNames : {
-                whatKindSearch = "other names";
+                whatKindSearch_ = "other names";
                 insertValueToSearch();
-                searchByOtherNames(insertValueToFind);
+                searchByOtherNames(insertValueToFind_);
             } break;
             case ChooseMenu::mail : {
-                whatKindSearch = "email";
+                whatKindSearch_ = "email";
                 insertValueToSearch();
-                searchByEmail(insertValueToFind);
+                searchByEmail(insertValueToFind_);
             } break;
             case ChooseMenu::tel : {
-                whatKindSearch = "telephone number";
+                whatKindSearch_ = "telephone number";
                 insertValueToSearch();
-                searchByTel(insertValueToFind);
+                searchByTel(insertValueToFind_);
             } break;
             case ChooseMenu::street : {
-                whatKindSearch = "street";
+                whatKindSearch_ = "street";
                 insertValueToSearch();
-                searchByStreet(insertValueToFind);
+                searchByStreet(insertValueToFind_);
             } break;
             case ChooseMenu::town : {
-                whatKindSearch = "town";
+                whatKindSearch_ = "town";
                 insertValueToSearch();
-                searchByTown(insertValueToFind);
+                searchByTown(insertValueToFind_);
             } break;
             case ChooseMenu::country : {
-                whatKindSearch = "country";
+                whatKindSearch_ = "country";
                 insertValueToSearch();
-                searchByCountry(insertValueToFind);
+                searchByCountry(insertValueToFind_);
             } break;
-            case ChooseMenu::exit : {
-                exitFromSearch_ = true;
-            } break;
+            // case ChooseMenu::exit : {
+            //     exitFromSearch_ = true;
+            // } break;
             default : {
                 
             } break;
@@ -325,8 +326,8 @@ void RecordApp::menuActionSearch(){
 
 void RecordApp::insertValueToSearch(){
     do{
-        std::cout << "Search by "<< whatKindSearch << ". Please insert value to search ";
-        std::cin >> insertValueToFind;
+        std::cout << "Search by "<< whatKindSearch_ << ". Please insert value to search ";
+        std::cin >> insertValueToFind_;
     } while (validValueToFind() == false);
     
 }
@@ -335,7 +336,7 @@ void RecordApp::searchByName(std::string name){
     searchResult_.clear();
     for (auto const& element : person_){
         if (element.getFirstName() == name){
-            searchResult_.push_back(Person(element));
+            searchResult_.insert({iterator_, element});
         }
     }
 }
@@ -344,7 +345,7 @@ void RecordApp::searchByOtherNames(std::string otherNames){
     searchResult_.clear();
     for (auto const& element : person_){
         if (element.getOthersName() == otherNames){
-            searchResult_.push_back(Person(element));
+            searchResult_.insert({iterator_, element});
         }
     }
 }
@@ -353,7 +354,7 @@ void RecordApp::searchByEmail(std::string email){
     searchResult_.clear();
     for (auto const& element : person_){
         if (element.getEmail() == email){
-            searchResult_.push_back(Person(element));
+            searchResult_.insert({iterator_, element});
         }
     }
 }
@@ -362,7 +363,7 @@ void RecordApp::searchByTel(std::string tel){
     searchResult_.clear();
     for (auto const& element : person_){
         if (element.getTel() == tel){
-            searchResult_.push_back(Person(element));
+            searchResult_.insert({iterator_, element});
         }
     }
 }
@@ -371,7 +372,7 @@ void RecordApp::searchByStreet(std::string street){
     searchResult_.clear();
     for (auto const& element : person_){
         if (element.getStreet() == street){
-            searchResult_.push_back(Person(element));
+            searchResult_.insert({iterator_, element});
         }
     }
 }
@@ -380,16 +381,21 @@ void RecordApp::searchByTown(std::string town){
     searchResult_.clear();
     for (auto const& element : person_){
         if (element.getTown() == town){
-            searchResult_.push_back(Person(element));
+            searchResult_.insert({iterator_, element});
         }
     }
 }
 
 void RecordApp::searchByCountry(std::string country){
     searchResult_.clear();
-    for (auto const& element : person_){
+    iterator_ = 0;
+    for (auto const &element : person_){
         if (element.getCountry() == country){
-            searchResult_.push_back(Person(element));
+            searchResult_.insert({iterator_, element});
         }
     }
+}
+
+void RecordApp::printSearchPersons(){
+    
 }
