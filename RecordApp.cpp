@@ -5,9 +5,23 @@
 
 
 void RecordApp::startApp(){
+
+    ////////////////////////////////////////////////////test only
+    // person_.reserve(1000000);
+    // std::string a = "a";
+    // Person temp(a, a, a, a, a, a, a);
+    // for (int i = 0; i < 1000000; i++){
+    //     person_.push_back(Person(temp));
+    // }
+    //std::cout << person_.size() << "\n";
+    //searchByName("a");
+    ///////////////////////////////////////////////////////////// del after test
+    
     loadFromFile();
     printMenu();
     menuAction();
+    //std::cout << searchResult_.size() << "\n";
+    
 }
 
 void RecordApp::printMenu(){
@@ -33,9 +47,10 @@ void RecordApp::menuAction(){
             addPerson();  
             } break;
             case MenuOption::search: {
-            
+                
             } break;
             case MenuOption::exit : {
+                exitApp();
                 exit_ = true;
             } break;
             default : {
@@ -54,7 +69,17 @@ void RecordApp::addPerson(){
     addTelephoneNumber();
     addAddress();
     person_.push_back(Person(firstName_, otherNames_, email_, tel_, street_, town_, country_));
-    saveToFile();
+    //saveToFile();
+}
+
+void RecordApp::searchPerson(){
+
+}
+
+void RecordApp::exitApp(){
+    for (int i = 0; i < static_cast<int>(person_.size()); i++){
+        saveToFile(i);
+    }
 }
 
 void RecordApp::addName(){
@@ -159,17 +184,17 @@ bool RecordApp::validCountry(){
 }
 
 
-void RecordApp::saveToFile(){
+void RecordApp::saveToFile(int index){
     std::fstream file;
     file.open("records.txt", std::ios::out | std::ios::app);
-    file << "[Person nr: " << person_.size() << "]\n";
-    file << person_[person_.size() - 1].getFirstName() << "\n";
-    file << person_[person_.size() - 1].getOthersName() << "\n";
-    file << person_[person_.size() - 1].getEmail() << "\n";
-    file << person_[person_.size() - 1].getTel() << "\n";
-    file << person_[person_.size() - 1].getStreet() << "\n";
-    file << person_[person_.size() - 1].getTown() << "\n";
-    file << person_[person_.size() - 1].getCountry() << "\n\n";
+    file << "[Person nr: " << index + 1 << "]\n";
+    file << person_[index].getFirstName() << "\n";
+    file << person_[index].getOthersName() << "\n";
+    file << person_[index].getEmail() << "\n";
+    file << person_[index].getTel() << "\n";
+    file << person_[index].getStreet() << "\n";
+    file << person_[index].getTown() << "\n";
+    file << person_[index].getCountry() << "\n\n";
     file.close();
 }
 
@@ -181,8 +206,8 @@ void RecordApp::loadFromFile(){
 	file.open("records.txt", std::ios::in);
 	if (file.good() == false)
 	{
-		std::cout << "File not exist" << std::endl;
-		exit(0);
+		std::cout << "Created new file\n";
+		file.open("records.txt", std::ios::out | std::ios::app);
 	}
 	while (getline(file, line)){
        
@@ -211,8 +236,8 @@ int RecordApp::countRecord(){
 	file.open("records.txt", std::ios::in);
 	if (file.good() == false)
 	{
-		std::cout << "File not exist" << std::endl;
-		exit(0);
+		std::cout << "Created new file\n";
+		file.open("records.txt", std::ios::out | std::ios::app);
 	}
 	while (getline(file, line)){
         lineNo++;
@@ -287,3 +312,12 @@ void RecordApp::menuActionSearch(){
     } while (exit_ == true);
 
 }
+
+void RecordApp::searchByName(std::string name){
+    for (auto const& element : person_){
+        if (element.getFirstName() == name){
+            searchResult_.push_back(Person(element));
+        }
+    }
+}
+

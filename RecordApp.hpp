@@ -25,9 +25,12 @@ public:
     };
     
 private:
+
     void printMenu();
     void menuAction();
     void addPerson();
+    void searchPerson();
+    void exitApp();
 
     void addName();
     void addOtherNames();
@@ -46,14 +49,17 @@ private:
     bool validTown();
     bool validCountry();
 
-    void saveToFile();
+    void saveToFile(int);
     void loadFromFile();
     int countRecord();
     int searchCandidate(std::string);
     void printSearchMenu();
     void menuActionSearch();
 
+    void searchByName(std::string);
+
     std::vector<Person>person_;
+    std::vector<Person>searchResult_;
     MenuOption menuOption_ { MenuOption::add };
     ChooseMenu menuChooseOption_ { ChooseMenu::name };
     int optionMenu_ { 0 };
