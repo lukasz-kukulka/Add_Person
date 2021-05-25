@@ -370,10 +370,19 @@ void RecordApp::searchByStreet(std::string street){
     }
 }
 
-void RecordApp::searchByTel(std::string town){
+void RecordApp::searchByTown(std::string town){
     searchResult_.clear();
     for (auto const& element : person_){
         if (element.getTown() == town){
+            searchResult_.push_back(Person(element));
+        }
+    }
+}
+
+void RecordApp::searchByCountry(std::string country){
+    searchResult_.clear();
+    for (auto const& element : person_){
+        if (element.getCountry() == country){
             searchResult_.push_back(Person(element));
         }
     }
