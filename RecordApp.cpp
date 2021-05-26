@@ -192,11 +192,10 @@ bool RecordApp::validTelephoneNumber(){
     ifInsertingStringIsCorrect = true;
     ifInsertingStringIsCorrect = maxLengthCheck(10, tel_);
     if (!std::all_of(tel_.begin(), tel_.end(), [](char i){return std::isdigit(i);})) {
+        std::cout << "Not all character is digit\n";
         ifInsertingStringIsCorrect = false;
     }
     return ifInsertingStringIsCorrect;
-
-    return false;
 }
 
 bool RecordApp::validStreet(){
