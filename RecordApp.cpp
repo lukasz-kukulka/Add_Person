@@ -214,8 +214,11 @@ bool RecordApp::validStreet(){
 }
 
 bool RecordApp::validTown(){
-    //TO DO
-    return true;
+    std::system("clear");
+    ifInsertingStringIsCorrect = true;
+    ifInsertingStringIsCorrect = ifStringIsAlphabetChar(town_);
+    ifInsertingStringIsCorrect = maxLengthCheck(30, town_);
+    return ifInsertingStringIsCorrect;;
 }
 
 bool RecordApp::validCountry(){
