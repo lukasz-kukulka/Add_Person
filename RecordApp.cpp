@@ -162,9 +162,8 @@ bool RecordApp::maxLengthCheck(int index, std::string word){
     if (index >= static_cast<int>(word.size())){
         std::cout << "Maximum length is " << index << "\n";
         return false;
-    } else {
-        return true;
     }
+    return true;
 }
 
 bool RecordApp::validName(){
@@ -189,8 +188,15 @@ bool RecordApp::validEmail(){
 }
 
 bool RecordApp::validTelephoneNumber(){
-    //TO DO
-    return true;
+    std::system("clear");
+    ifInsertingStringIsCorrect = true;
+    ifInsertingStringIsCorrect = maxLengthCheck(10, tel_);
+    if (!std::all_of(tel_.begin(), tel_.end(), [](char i){return std::isdigit(i);})) {
+        ifInsertingStringIsCorrect = false;
+    }
+    return ifInsertingStringIsCorrect;
+
+    return false;
 }
 
 bool RecordApp::validStreet(){
