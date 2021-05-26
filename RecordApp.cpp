@@ -206,8 +206,11 @@ bool RecordApp::validTelephoneNumber(){
 }
 
 bool RecordApp::validStreet(){
-    //TO DO
-    return true;
+    std::system("clear");
+    ifInsertingStringIsCorrect = true;
+    ifInsertingStringIsCorrect = ifStringIsAlphabetChar(street_);
+    ifInsertingStringIsCorrect = maxLengthCheck(50, street_);
+    return ifInsertingStringIsCorrect;
 }
 
 bool RecordApp::validTown(){
