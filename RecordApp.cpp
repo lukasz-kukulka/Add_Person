@@ -170,14 +170,17 @@ bool RecordApp::maxLengthCheck(int index, std::string word){
 bool RecordApp::validName(){
     std::system("clear");
     ifInsertingStringIsCorrect = true;
-    ifInsertingStringIsCorrect = ifStringIsDigit(firstName_);
+    ifInsertingStringIsCorrect = ifStringIsAlphabetChar(firstName_);
     ifInsertingStringIsCorrect = maxLengthCheck(30, firstName_);
     return ifInsertingStringIsCorrect;
 }
 
 bool RecordApp::validOtherNames(){
-    //TO DO
-    return true;
+    std::system("clear");
+    ifInsertingStringIsCorrect = true;
+    ifInsertingStringIsCorrect = ifStringIsAlphabetChar(otherNames_);
+    ifInsertingStringIsCorrect = maxLengthCheck(50, otherNames_);
+    return ifInsertingStringIsCorrect;
 }
 
 bool RecordApp::validEmail(){
