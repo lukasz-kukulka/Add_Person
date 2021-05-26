@@ -222,8 +222,11 @@ bool RecordApp::validTown(){
 }
 
 bool RecordApp::validCountry(){
-    //TO DO
-    return true;
+    std::system("clear");
+    ifInsertingStringIsCorrect = true;
+    ifInsertingStringIsCorrect = ifStringIsAlphabetChar(country_);
+    ifInsertingStringIsCorrect = maxLengthCheck(30, country_);
+    return ifInsertingStringIsCorrect;
 }
 
 bool RecordApp::validValueToFind(){
