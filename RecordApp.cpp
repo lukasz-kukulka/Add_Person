@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <cctype>
+#include <algorithm>
 
 #include "RecordApp.hpp"
 
@@ -147,10 +149,18 @@ void RecordApp::addCountry(){
     } while (validCountry() == false);
 }
     
-
+bool RecordApp::ifStringIsDigit(std::string value){
+    if (std::any_of(value.begin(), value.end(), [](char i){return std::isdigit(i);})) {
+        return false;
+    } else {
+        return true;
+    }
+}
 
 bool RecordApp::validName(){
-    //TO DO
+
+
+
     return true;
 }
 
@@ -396,6 +406,6 @@ void RecordApp::searchByCountry(std::string country){
     }
 }
 
-void RecordApp::printSearchPersons(){
-    
-}
+// void RecordApp::printSearchPersons(){
+//     std::cout << " "
+// }

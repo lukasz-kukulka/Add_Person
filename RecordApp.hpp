@@ -51,6 +51,9 @@ private:
     bool validTown();
     bool validCountry();
     bool validValueToFind();
+    bool ifStringIsDigit(std::string)
+    
+}
 
     void saveToFile(int);
     void loadFromFile();
