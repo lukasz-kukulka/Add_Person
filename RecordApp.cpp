@@ -183,8 +183,15 @@ bool RecordApp::validOtherNames(){
 }
 
 bool RecordApp::validEmail(){
-    //TO DO
-    return true;
+    std::system("clear");
+    ifInsertingStringIsCorrect = true;
+    auto countAt = std::count(email_.begin(), email_.end(), '@');
+    auto countPoint = std::count(email_.begin(), email_.end(), '.');
+    if (countAt!= 1 || countPoint != 1){
+        ifInsertingStringIsCorrect = false;
+        std::cout << "Email address is not correct\n";
+    }
+    return ifInsertingStringIsCorrect;
 }
 
 bool RecordApp::validTelephoneNumber(){
