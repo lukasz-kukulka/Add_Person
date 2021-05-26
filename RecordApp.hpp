@@ -51,7 +51,7 @@ private:
     bool validTown();
     bool validCountry();
     bool validValueToFind();
-    bool ifStringIsDigit(std::string);
+    bool ifStringIsAlphabetChar(std::string);
     bool maxLengthCheck(int, std::string);
 
     void saveToFile(int);

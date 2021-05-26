@@ -149,12 +149,12 @@ void RecordApp::addCountry(){
     } while (validCountry() == false);
 }
     
-bool RecordApp::ifStringIsDigit(std::string value){
-    if (std::any_of(value.begin(), value.end(), [](char i){return std::isdigit(i);})) {
-        std::cout << "Minimum one of character is digit\n";
-        return false;
-    } else {
+bool RecordApp::ifStringIsAlphabetChar(std::string value){
+    if (std::all_of(value.begin(), value.end(), [](char i){return std::isalpha(i);})) {
         return true;
+    } else {
+        std::cout << "Minimum one character is not alphabetic\n";
+        return false;
     }
 }
 
