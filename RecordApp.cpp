@@ -151,6 +151,16 @@ void RecordApp::addCountry(){
     
 bool RecordApp::ifStringIsDigit(std::string value){
     if (std::any_of(value.begin(), value.end(), [](char i){return std::isdigit(i);})) {
+        std::cout << "Minimum one of character is digit\n";
+        return false;
+    } else {
+        return true;
+    }
+}
+
+bool RecordApp::maxLengthCheck(int index, std::string word){
+    if (index >= static_cast<int>(word.size())){
+        std::cout << "Maximum length is " << index << "\n";
         return false;
     } else {
         return true;
@@ -158,10 +168,11 @@ bool RecordApp::ifStringIsDigit(std::string value){
 }
 
 bool RecordApp::validName(){
-
-
-
-    return true;
+    std::system("clear");
+    ifInsertingStringIsCorrect = true;
+    ifInsertingStringIsCorrect = ifStringIsDigit(firstName_);
+    ifInsertingStringIsCorrect = maxLengthCheck(30, firstName_);
+    return ifInsertingStringIsCorrect;
 }
 
 bool RecordApp::validOtherNames(){

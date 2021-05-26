@@ -51,9 +51,8 @@ private:
     bool validTown();
     bool validCountry();
     bool validValueToFind();
-    bool ifStringIsDigit(std::string)
-    
-}
+    bool ifStringIsDigit(std::string);
+    bool maxLengthCheck(int, std::string);
 
     void saveToFile(int);
     void loadFromFile();
@@ -90,4 +89,5 @@ private:
     std::string whatKindSearch_ { "" };
     std::string insertValueToFind_ { "" };
     int iterator_ { 0 };
+    bool ifInsertingStringIsCorrect { true };
 };
