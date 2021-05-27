@@ -8,23 +8,9 @@
 
 
 void RecordApp::startApp(){
-
-    ////////////////////////////////////////////////////test only
-    // person_.reserve(1000000);
-    // std::string a = "a";
-    // Person temp(a, a, a, a, a, a, a);
-    // for (int i = 0; i < 1000000; i++){
-    //     person_.push_back(Person(temp));
-    // }
-    //std::cout << person_.size() << "\n";
-    //searchByName("a");
-    ///////////////////////////////////////////////////////////// del after test
-    
     loadFromFile();
     printMenu();
     menuAction();
-    //std::cout << searchResult_.size() << "\n";
-    
 }
 
 void RecordApp::printMenu(){
@@ -438,9 +424,27 @@ void RecordApp::searchByCountry(std::string country){
         if (element.getCountry() == country){
             searchResult_.insert({iterator_, element});
         }
+        iterator_++;
     }
 }
 
-// void RecordApp::printSearchPersons(){
-//     std::cout << " "
-// }
+void RecordApp::printSearchPersons(){
+    int selectPerson = 0;
+    for(auto const & element : searchResult_){
+        selectPerson = element.first;
+        std::cout << "ID in database: " << element.first << " | "
+                  << "First name: " << element.second.getFirstName() << " | "
+                  << "Other names: " << element.second.getOthersName() << " | "
+                  << "Email: " << element.second.getEmail() << " | "
+                  << "Telephone number: " << element.second.getTel() << " | "
+                  << "Street: " << element.second.getStreet() << " | "
+                  << "Town: " << element.second.getTown()<< " | "
+                  << "Country: " << element.second.getCountry() << "\n";
+    }
+    if (searchResult_.size() > 1){
+        std::cout << "Insert ID with person you wanna choose: ";
+        std::cin >> selectPerson;
+    }
+    std::cout << "What you wanna do: \n";
+    
+}

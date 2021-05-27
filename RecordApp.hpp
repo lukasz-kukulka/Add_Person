@@ -90,4 +90,5 @@ private:
     std::string insertValueToFind_ { "" };
     int iterator_ { 0 };
     bool ifInsertingStringIsCorrect { true };
+    int selectPerson_ = { 0 };
 };
