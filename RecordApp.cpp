@@ -444,14 +444,17 @@ void RecordApp::printSearchPersons(){
 
 int RecordApp::actionAfterSearch(){
     int chooseActionInPlayerSearch = 0;
-    
     if (searchResult_.size() > 1) {
     std::cout << "Insert ID with person you wanna choose: ";
     std::cin >> selectPerson_;
     }
-    std::cout << "What you wanna do: \n";
-    std::cout << "1. Delete: \n";
-    std::cout << "2. Back: \n";
-
+    do{
+        std::cout << "What you wanna do: \n";
+        std::cout << "1. Delete: \n";
+        std::cout << "2. Back: \n";
+        std::cin >> chooseActionInPlayerSearch;
+    } while (chooseActionInPlayerSearch == 1 || chooseActionInPlayerSearch == 2);
+    return chooseActionInPlayerSearch;
 }
+
 
