@@ -429,9 +429,8 @@ void RecordApp::searchByCountry(std::string country){
 }
 
 void RecordApp::printSearchPersons(){
-    int selectPerson = 0;
     for(auto const & element : searchResult_){
-        selectPerson = element.first;
+        selectPerson_ = element.first;
         std::cout << "ID in database: " << element.first << " | "
                   << "First name: " << element.second.getFirstName() << " | "
                   << "Other names: " << element.second.getOthersName() << " | "
@@ -441,10 +440,18 @@ void RecordApp::printSearchPersons(){
                   << "Town: " << element.second.getTown()<< " | "
                   << "Country: " << element.second.getCountry() << "\n";
     }
-    if (searchResult_.size() > 1){
-        std::cout << "Insert ID with person you wanna choose: ";
-        std::cin >> selectPerson;
+}
+
+int RecordApp::actionAfterSearch(){
+    int chooseActionInPlayerSearch = 0;
+    
+    if (searchResult_.size() > 1) {
+    std::cout << "Insert ID with person you wanna choose: ";
+    std::cin >> selectPerson_;
     }
     std::cout << "What you wanna do: \n";
-    
+    std::cout << "1. Delete: \n";
+    std::cout << "2. Back: \n";
+
 }
+

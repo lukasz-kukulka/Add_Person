@@ -70,6 +70,7 @@ private:
     void searchByCountry(std::string);
 
     void printSearchPersons();
+    int actionAfterSearch();
 
     std::vector<Person>person_;
     //std::vector<Person>searchResult_;
