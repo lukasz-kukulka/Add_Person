@@ -71,7 +71,7 @@ private:
 
     void printSearchPersons();
     int actionAfterSearch();
-    int askIfStopSearch():
+    int askIfStopSearch();
 
     std::vector<Person>person_;
     //std::vector<Person>searchResult_;

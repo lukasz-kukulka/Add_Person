@@ -221,7 +221,9 @@ bool RecordApp::validCountry(){
 }
 
 bool RecordApp::validValueToFind(){
-    //TO DO
+    if (askIfStopSearch() == 1){
+        return false;
+    }
     return true;
 }
 
@@ -378,7 +380,10 @@ int RecordApp::askIfStopSearch(){
         std::cout << "I can't find this value, what you wanna do: \n";
         std::cout << "1. Try insert again. \n";
         std::cout << "2. Back \n";
-        std::cin >> result;
+        do{
+            std::cin >> result;
+            std::cout << "Wrong value: \n";
+        }while (result == 1 || result == 2);
     }
     return result;
 }
