@@ -71,6 +71,7 @@ private:
 
     void printSearchPersons();
     int actionAfterSearch();
+    int askIfStopSearch():
 
     std::vector<Person>person_;
     //std::vector<Person>searchResult_;
@@ -78,6 +79,7 @@ private:
     MenuOption menuOption_ { MenuOption::add };
     ChooseMenu menuChooseOption_ { ChooseMenu::name };
     int optionMenu_ { 0 };
+    int optionSearchMenu_ { 0 };
     std::string firstName_;
     std::string otherNames_;
     std::string email_;

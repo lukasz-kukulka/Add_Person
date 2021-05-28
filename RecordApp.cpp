@@ -9,8 +9,8 @@
 
 void RecordApp::startApp(){
     loadFromFile();
-    printMenu();
     menuAction();
+    std::cout << "|      ---------------------------------------------------------------------------------------------------------------      |\n";
 }
 
 void RecordApp::printMenu(){
@@ -27,27 +27,32 @@ void RecordApp::printMenu(){
 
 void RecordApp::menuAction(){
     do{
+        std::system("clear");
+        printMenu();
+        
         std::cout << "CHOOSE YOUR OPTION: ";
         std::cin >> optionMenu_;
         menuOption_ = static_cast<RecordApp::MenuOption>(optionMenu_);
+
         switch (menuOption_)
         {
             case MenuOption::add : {
-            addPerson();  
+                addPerson();  
             } break;
             case MenuOption::search: {
-                
+                searchPerson();
             } break;
             case MenuOption::exit : {
                 exitApp();
-                exit_ = true;
+                //exit_ = true;
             } break;
             default : {
-            
+                std::cout << "Wrong value, choose again\n";
             } break;
         }
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max());
 
-    } while (exit_ == true);
+    } while (exit_ != true);
 
 }
 
@@ -303,9 +308,11 @@ void RecordApp::printSearchMenu(){
 void RecordApp::menuActionSearch(){
     do{
         exitFromSearch_ = false;
+        
         std::cout << "CHOOSE WITH KIND SEARCH YOU WILL USE: ";
-        std::cin >> optionMenu_;
-        menuChooseOption_ = static_cast<RecordApp::ChooseMenu>(optionMenu_);
+        std::cin >> optionSearchMenu_;
+        menuChooseOption_ = static_cast<RecordApp::ChooseMenu>(optionSearchMenu_);
+        
         switch (menuChooseOption_)
         {
             case ChooseMenu::name : { 
@@ -343,24 +350,37 @@ void RecordApp::menuActionSearch(){
                 insertValueToSearch();
                 searchByCountry(insertValueToFind_);
             } break;
-            // case ChooseMenu::exit : {
-            //     exitFromSearch_ = true;
-            // } break;
+            case ChooseMenu::exit : {
+                std::system("clear");
+                exitFromSearch_ = true;
+            } break;
             default : {
-                
+                std::cout << "Wrong value, choose again\n";
             } break;
         }
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max());
 
-    } while (exitFromSearch_ == true);
+    } while (exitFromSearch_ != true);
 
 }
 
 void RecordApp::insertValueToSearch(){
     do{
-        std::cout << "Search by "<< whatKindSearch_ << ". Please insert value to search ";
+        std::cout << "Search by "<< whatKindSearch_ << ". Please insert value to search: ";
         std::cin >> insertValueToFind_;
     } while (validValueToFind() == false);
     
+}
+
+int RecordApp::askIfStopSearch(){
+    int result = 0;
+    if (searchResult_.size() == 0){
+        std::cout << "I can't find this value, what you wanna do: \n";
+        std::cout << "1. Try insert again. \n";
+        std::cout << "2. Back \n";
+        std::cin >> result;
+    }
+    return result;
 }
 
 void RecordApp::searchByName(std::string name){
