@@ -358,6 +358,7 @@ void RecordApp::menuActionSearch(){
             } break;
             default : {
                 std::cout << "Wrong value, choose again\n";
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max());
             } break;
         }
         std::cin.ignore(std::numeric_limits<std::streamsize>::max());
@@ -370,21 +371,23 @@ void RecordApp::insertValueToSearch(){
     do{
         std::cout << "Search by "<< whatKindSearch_ << ". Please insert value to search: ";
         std::cin >> insertValueToFind_;
+        
     } while (validValueToFind() == false);
-    
+    std::cout << "-----------------------------------------------------------------------------------------------/n ";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max());
 }
 
 int RecordApp::askIfStopSearch(){
     int result = 0;
     if (searchResult_.size() == 0){
-        std::cout << "I can't find this value, what you wanna do: \n";
-        std::cout << "1. Try insert again. \n";
-        std::cout << "2. Back \n";
         do{
+            std::cout << "I can't find this value, what you wanna do: \n";
+            std::cout << "1. Try insert again. \n";
+            std::cout << "2. Back \n";
             std::cin >> result;
-            std::cout << "Wrong value: \n";
-        }while (result == 1 || result == 2);
+        }while (result != 1 && result != 2);
     }
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max());
     return result;
 }
 
@@ -478,6 +481,7 @@ int RecordApp::actionAfterSearch(){
         std::cout << "1. Delete: \n";
         std::cout << "2. Back: \n";
         std::cin >> chooseActionInPlayerSearch;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max());
     } while (chooseActionInPlayerSearch == 1 || chooseActionInPlayerSearch == 2);
     return chooseActionInPlayerSearch;
 }
