@@ -25,6 +25,13 @@ public:
         country,
         exit
     };
+
+        enum class StateStatus {
+            back = 1,
+            tryInsterAgain,
+            deleteItem
+    } stateStatus_;
+
     
 private:
 
@@ -71,7 +78,7 @@ private:
 
     void printSearchPersons();
     int actionAfterSearch();
-    int askIfStopSearch();
+    StateStatus askIfStopSearch();
 
     std::vector<Person>person_;
     //std::vector<Person>searchResult_;

@@ -221,7 +221,7 @@ bool RecordApp::validCountry(){
 }
 
 bool RecordApp::validValueToFind(){
-    if (askIfStopSearch() == 1){
+    if (askIfStopSearch() == RecordApp::StateStatus::back){
         return false;
     }
     return true;
@@ -377,7 +377,7 @@ void RecordApp::insertValueToSearch(){
     std::cin.ignore(std::numeric_limits<std::streamsize>::max());
 }
 
-int RecordApp::askIfStopSearch(){
+RecordApp::StateStatus RecordApp::askIfStopSearch(){
     int result = 0;
     if (searchResult_.size() == 0){
         do{
@@ -385,10 +385,11 @@ int RecordApp::askIfStopSearch(){
             std::cout << "1. Try insert again. \n";
             std::cout << "2. Back \n";
             std::cin >> result;
-        }while (result != 1 && result != 2);
+            stateStatus_ = static_cast<StateStatus>(result);
+        }while (stateStatus_ != StateStatus::tryInsterAgain && stateStatus_ != StateStatus::back);
     }
     std::cin.ignore(std::numeric_limits<std::streamsize>::max());
-    return result;
+    return stateStatus_;
 }
 
 void RecordApp::searchByName(std::string name){
