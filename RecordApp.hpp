@@ -77,7 +77,7 @@ private:
     void searchByCountry(std::string);
 
     void printSearchPersons();
-    int actionAfterSearch();
+    StateStatus actionAfterSearch();
     StateStatus askIfStopSearch();
 
     std::vector<Person>person_;

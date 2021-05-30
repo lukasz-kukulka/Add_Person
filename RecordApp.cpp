@@ -471,7 +471,7 @@ void RecordApp::printSearchPersons(){
     }
 }
 
-int RecordApp::actionAfterSearch(){
+RecordApp::StateStatus RecordApp::actionAfterSearch(){
     int chooseActionInPlayerSearch = 0;
     if (searchResult_.size() > 1) {
     std::cout << "Insert ID with person you wanna choose: ";
@@ -482,9 +482,10 @@ int RecordApp::actionAfterSearch(){
         std::cout << "1. Delete: \n";
         std::cout << "2. Back: \n";
         std::cin >> chooseActionInPlayerSearch;
+        stateStatus_ = static_cast<StateStatus>(chooseActionInPlayerSearch);
         std::cin.ignore(std::numeric_limits<std::streamsize>::max());
-    } while (chooseActionInPlayerSearch == 1 || chooseActionInPlayerSearch == 2);
-    return chooseActionInPlayerSearch;
+    } while (stateStatus_ != StateStatus::deleteItem && stateStatus_ != StateStatus::back);
+    return stateStatus_;
 }
 
 
