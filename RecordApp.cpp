@@ -33,7 +33,6 @@ void RecordApp::menuAction(){
         std::cout << "CHOOSE YOUR OPTION: ";
         std::cin >> optionMenu_;
         menuOption_ = static_cast<RecordApp::MenuOption>(optionMenu_);
-
         switch (menuOption_)
         {
             case MenuOption::add : {
@@ -48,12 +47,11 @@ void RecordApp::menuAction(){
             } break;
             default : {
                 std::cout << "Wrong value, choose again\n";
+                
             } break;
         }
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max());
-
-    } while (exit_ != true);
-
+    } while (menuOption_ != MenuOption::exit);
+    //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 void RecordApp::addPerson(){
@@ -358,10 +356,10 @@ void RecordApp::menuActionSearch(){
             } break;
             default : {
                 std::cout << "Wrong value, choose again\n";
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max());
+                //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             } break;
         }
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max());
+        //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     } while (exitFromSearch_ != true);
 
@@ -369,26 +367,25 @@ void RecordApp::menuActionSearch(){
 
 void RecordApp::insertValueToSearch(){
     do{
-        std::cout << "Search by "<< whatKindSearch_ << ". Please insert value to search: ";
-        std::cin >> insertValueToFind_;
-        
+        std::cout << "Search by "<< whatKindSearch_ << ". Please insert value to search:\n";
+        std::cin >> insertValueToFind_ ;
     } while (validValueToFind() == false);
-    std::cout << "-----------------------------------------------------------------------------------------------/n ";
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max());
 }
 
 RecordApp::StateStatus RecordApp::askIfStopSearch(){
     int result = 0;
+    
     if (searchResult_.size() == 0){
         do{
             std::cout << "I can't find this value, what you wanna do: \n";
             std::cout << "1. Try insert again. \n";
             std::cout << "2. Back \n";
+            //std::cin.clear();
             std::cin >> result;
             stateStatus_ = static_cast<StateStatus>(result);
         }while (stateStatus_ != StateStatus::tryInsterAgain && stateStatus_ != StateStatus::back);
     }
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max());
+    exitFromSearch_ = true;
     return stateStatus_;
 }
 
@@ -483,7 +480,7 @@ RecordApp::StateStatus RecordApp::actionAfterSearch(){
         std::cout << "2. Back: \n";
         std::cin >> chooseActionInPlayerSearch;
         stateStatus_ = static_cast<StateStatus>(chooseActionInPlayerSearch);
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max());
+        //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     } while (stateStatus_ != StateStatus::deleteItem && stateStatus_ != StateStatus::back);
     return stateStatus_;
 }
