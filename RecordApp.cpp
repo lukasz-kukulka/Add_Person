@@ -9,6 +9,7 @@
 
 void RecordApp::startApp(){
     loadFromFile();
+    std::cout << person_[0].getFirstName();
     menuAction();
     std::cout << "|      ---------------------------------------------------------------------------------------------------------------      |\n";
 }
@@ -148,7 +149,7 @@ bool RecordApp::ifStringIsAlphabetChar(std::string value){
 }
 
 bool RecordApp::maxLengthCheck(int index, std::string word){
-    if (index >= static_cast<int>(word.size())){
+    if (index <= static_cast<int>(word.size())){
         std::cout << "Maximum length is " << index << "\n";
         return false;
     }
@@ -219,9 +220,10 @@ bool RecordApp::validCountry(){
 }
 
 bool RecordApp::validValueToFind(){
-    if (askIfStopSearch() == RecordApp::StateStatus::back){
-        return false;
-    }
+
+    // if (askIfStopSearch() == RecordApp::StateStatus::back){
+    //     return false;
+    // }
     return true;
 }
 
@@ -369,10 +371,11 @@ void RecordApp::insertValueToSearch(){
     do{
         std::cout << "Search by "<< whatKindSearch_ << ". Please insert value to search:\n";
         std::cin >> insertValueToFind_ ;
+        //std::cout << insertValueToFind_ << "  <- insertValueToFind_    #####################################################    tab->  " << searchResult_.at(0).getFirstName();
     } while (validValueToFind() == false);
 }
 
-RecordApp::StateStatus RecordApp::askIfStopSearch(){
+void RecordApp::askIfStopSearch(){
     int result = 0;
     
     if (searchResult_.size() == 0){
@@ -384,27 +387,32 @@ RecordApp::StateStatus RecordApp::askIfStopSearch(){
             std::cin >> result;
             stateStatus_ = static_cast<StateStatus>(result);
         }while (stateStatus_ != StateStatus::tryInsterAgain && stateStatus_ != StateStatus::back);
+        exitFromSearch_ = true;
+    } else {
+        actionAfterSearch();
     }
-    exitFromSearch_ = true;
-    return stateStatus_;
 }
 
 void RecordApp::searchByName(std::string name){
     searchResult_.clear();
+
     for (auto const& element : person_){
         if (element.getFirstName() == name){
             searchResult_.insert({iterator_, element});
         }
     }
+    askIfStopSearch();
 }
 
 void RecordApp::searchByOtherNames(std::string otherNames){
     searchResult_.clear();
     for (auto const& element : person_){
+        
         if (element.getOthersName() == otherNames){
             searchResult_.insert({iterator_, element});
         }
     }
+    askIfStopSearch();
 }
 
 void RecordApp::searchByEmail(std::string email){
@@ -414,6 +422,7 @@ void RecordApp::searchByEmail(std::string email){
             searchResult_.insert({iterator_, element});
         }
     }
+    askIfStopSearch();
 }
 
 void RecordApp::searchByTel(std::string tel){
@@ -423,6 +432,7 @@ void RecordApp::searchByTel(std::string tel){
             searchResult_.insert({iterator_, element});
         }
     }
+    askIfStopSearch();
 }
 
 void RecordApp::searchByStreet(std::string street){
@@ -432,6 +442,7 @@ void RecordApp::searchByStreet(std::string street){
             searchResult_.insert({iterator_, element});
         }
     }
+    askIfStopSearch();
 }
 
 void RecordApp::searchByTown(std::string town){
@@ -441,6 +452,7 @@ void RecordApp::searchByTown(std::string town){
             searchResult_.insert({iterator_, element});
         }
     }
+    askIfStopSearch();
 }
 
 void RecordApp::searchByCountry(std::string country){
@@ -452,6 +464,7 @@ void RecordApp::searchByCountry(std::string country){
         }
         iterator_++;
     }
+    askIfStopSearch();
 }
 
 void RecordApp::printSearchPersons(){
@@ -470,10 +483,9 @@ void RecordApp::printSearchPersons(){
 
 RecordApp::StateStatus RecordApp::actionAfterSearch(){
     int chooseActionInPlayerSearch = 0;
-    if (searchResult_.size() > 1) {
+    printSearchPersons();
     std::cout << "Insert ID with person you wanna choose: ";
     std::cin >> selectPerson_;
-    }
     do{
         std::cout << "What you wanna do: \n";
         std::cout << "1. Delete: \n";

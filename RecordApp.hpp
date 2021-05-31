@@ -78,7 +78,7 @@ private:
 
     void printSearchPersons();
     StateStatus actionAfterSearch();
-    StateStatus askIfStopSearch();
+    void askIfStopSearch();
 
     std::vector<Person>person_;
     //std::vector<Person>searchResult_;
