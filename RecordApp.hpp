@@ -80,6 +80,7 @@ private:
     StateStatus actionAfterSearch();
     void askIfStopSearch();
 
+
     std::vector<Person>person_;
     //std::vector<Person>searchResult_;
     std::map<int, Person>searchResult_;

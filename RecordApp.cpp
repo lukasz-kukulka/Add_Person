@@ -1,10 +1,12 @@
+#include "RecordApp.hpp"
+
 #include <iostream>
 #include <fstream>
 #include <iomanip>
 #include <cctype>
 #include <algorithm>
-
-#include "RecordApp.hpp"
+#include <limits>
+#include <ios>
 
 
 void RecordApp::startApp(){
@@ -39,7 +41,7 @@ void RecordApp::menuAction(){
             case MenuOption::add : {
                 std::system("clear");
                 std::cout << "ADDING PERSON TO DATA BASE\n";
-                addPerson();  
+                addPerson(); 
             } break;
             case MenuOption::search: {
                 std::system("clear");
@@ -163,15 +165,16 @@ bool RecordApp::maxLengthCheck(int index, std::string word){
 
 bool RecordApp::validName(){
     ifInsertingStringIsCorrect = true;
-    ifInsertingStringIsCorrect = ifStringIsAlphabetChar(firstName_);
-    ifInsertingStringIsCorrect = maxLengthCheck(30, firstName_);
+    if (ifStringIsAlphabetChar(firstName_) == false || maxLengthCheck(30, firstName_) == false) {
+        ifInsertingStringIsCorrect = false;
+    }
     return ifInsertingStringIsCorrect;
 }
-
 bool RecordApp::validOtherNames(){
     ifInsertingStringIsCorrect = true;
-    ifInsertingStringIsCorrect = ifStringIsAlphabetChar(otherNames_);
-    ifInsertingStringIsCorrect = maxLengthCheck(50, otherNames_);
+    if (ifStringIsAlphabetChar(otherNames_) == false || maxLengthCheck(50, otherNames_) == false) {
+        ifInsertingStringIsCorrect = false;
+    }
     return ifInsertingStringIsCorrect;
 }
 
@@ -179,7 +182,7 @@ bool RecordApp::validEmail(){
     ifInsertingStringIsCorrect = true;
     auto countAt = std::count(email_.begin(), email_.end(), '@');
     auto countPoint = std::count(email_.begin(), email_.end(), '.');
-    if (countAt!= 1 || countPoint != 1){
+    if (countAt != 1 || countPoint != 1){
         ifInsertingStringIsCorrect = false;
         std::cout << "Email address is not correct\n";
     }
@@ -189,7 +192,10 @@ bool RecordApp::validEmail(){
 bool RecordApp::validTelephoneNumber(){
 
     ifInsertingStringIsCorrect = true;
-    ifInsertingStringIsCorrect = maxLengthCheck(10, tel_);
+    if (tel_.size() != 10){
+        std::cout << "Telephone number should have 10 diggit number\n";
+        ifInsertingStringIsCorrect = false;
+    }
     if (!std::all_of(tel_.begin(), tel_.end(), [](char i){return std::isdigit(i);})) {
         std::cout << "Not all character is digit\n";
         ifInsertingStringIsCorrect = false;
@@ -199,22 +205,25 @@ bool RecordApp::validTelephoneNumber(){
 
 bool RecordApp::validStreet(){
     ifInsertingStringIsCorrect = true;
-    ifInsertingStringIsCorrect = ifStringIsAlphabetChar(street_);
-    ifInsertingStringIsCorrect = maxLengthCheck(50, street_);
+    if (ifStringIsAlphabetChar(street_) == false || maxLengthCheck(50, street_) == false) {
+        ifInsertingStringIsCorrect = false;
+    }
     return ifInsertingStringIsCorrect;
 }
 
 bool RecordApp::validTown(){
     ifInsertingStringIsCorrect = true;
-    ifInsertingStringIsCorrect = ifStringIsAlphabetChar(town_);
-    ifInsertingStringIsCorrect = maxLengthCheck(30, town_);
-    return ifInsertingStringIsCorrect;;
+    if (ifStringIsAlphabetChar(town_) == false || maxLengthCheck(50, town_) == false) {
+        ifInsertingStringIsCorrect = false;
+    }
+    return ifInsertingStringIsCorrect;
 }
 
 bool RecordApp::validCountry(){
     ifInsertingStringIsCorrect = true;
-    ifInsertingStringIsCorrect = ifStringIsAlphabetChar(country_);
-    ifInsertingStringIsCorrect = maxLengthCheck(30, country_);
+    if (ifStringIsAlphabetChar(country_) == false || maxLengthCheck(50, country_) == false) {
+        ifInsertingStringIsCorrect = false;
+    }
     return ifInsertingStringIsCorrect;
 }
 
