@@ -8,10 +8,11 @@
 
 
 void RecordApp::startApp(){
+    std::system("clear");
     loadFromFile();
-    std::cout << person_[0].getFirstName();
+    //std::cout << person_[0].getFirstName();
     menuAction();
-    std::cout << "|      ---------------------------------------------------------------------------------------------------------------      |\n";
+    //std::cout << "|      ---------------------------------------------------------------------------------------------------------------      |\n";
 }
 
 void RecordApp::printMenu(){
@@ -28,7 +29,6 @@ void RecordApp::printMenu(){
 
 void RecordApp::menuAction(){
     do{
-        std::system("clear");
         printMenu();
         
         std::cout << "CHOOSE YOUR OPTION: ";
@@ -37,14 +37,17 @@ void RecordApp::menuAction(){
         switch (menuOption_)
         {
             case MenuOption::add : {
+                std::system("clear");
+                std::cout << "ADDING PERSON TO DATA BASE\n";
                 addPerson();  
             } break;
             case MenuOption::search: {
+                std::system("clear");
                 searchPerson();
             } break;
             case MenuOption::exit : {
+                std::system("clear");
                 exitApp();
-                //exit_ = true;
             } break;
             default : {
                 std::cout << "Wrong value, choose again\n";
@@ -62,6 +65,15 @@ void RecordApp::addPerson(){
     addTelephoneNumber();
     addAddress();
     person_.push_back(Person(firstName_, otherNames_, email_, tel_, street_, town_, country_));
+    saveToFile(static_cast<int>(person_.size() - 1));
+    std::cout << "You added person.";
+    std::cout << "\n               Name: " << firstName_ 
+              << "\n               Other names: " << otherNames_
+              << "\n               Email: " << email_
+              << "\n               Tel.: " << tel_
+              << "\n               Address: Street: " << street_
+              << "\n                        Town: " << town_
+              << "\n                        Country " << country_ << "\n";
 }
 
 void RecordApp::searchPerson(){
@@ -77,39 +89,35 @@ void RecordApp::exitApp(){
 
 void RecordApp::addName(){
     do{
-        std::cout << "Enter your name: ";
+        std::cout << "Enter name: ";
         std::cin >> firstName_;
-        std::cout << "\n";
     } while (validName() == false);
 
 }
 
 void RecordApp::addOtherNames(){
     do{
-        std::cout << "Enter your other names: ";
+        std::cout << "Enter other names: ";
         std::cin >> otherNames_;
-        std::cout << "\n";
     } while (validOtherNames() == false);
 }
 
 void RecordApp::addEmail(){
     do{
-        std::cout << "Enter your email address: ";
+        std::cout << "Enter email address: ";
         std::cin >> email_;
-        std::cout << "\n";
     } while (validEmail() == false);
 }
 
 void RecordApp::addTelephoneNumber(){
     do{
-        std::cout << "Enter your telephone number: ";
+        std::cout << "Enter telephone number: ";
         std::cin >> tel_;
-        std::cout << "\n";
     } while (validTelephoneNumber() == false);
 }
 
 void RecordApp::addAddress(){
-    std::cout << "Enter your home address: \n";
+    std::cout << "Enter home address: \n";
     addStreet();
     addTown();
     addCountry();
@@ -119,7 +127,6 @@ void RecordApp::addStreet(){
     do{
         std::cout << "Street: ";
         std::cin >> street_;
-        std::cout << "\n";
     } while (validStreet() == false);
 }
 
@@ -127,7 +134,6 @@ void RecordApp::addTown(){
     do{
         std::cout << "Town: ";
         std::cin >> town_;
-        std::cout << "\n";
     } while (validTown() == false);
 }
     
@@ -135,7 +141,6 @@ void RecordApp::addCountry(){
     do{
         std::cout << "Country ";
         std::cin >> country_;
-        std::cout << "\n";
     } while (validCountry() == false);
 }
     
@@ -157,7 +162,6 @@ bool RecordApp::maxLengthCheck(int index, std::string word){
 }
 
 bool RecordApp::validName(){
-    std::system("clear");
     ifInsertingStringIsCorrect = true;
     ifInsertingStringIsCorrect = ifStringIsAlphabetChar(firstName_);
     ifInsertingStringIsCorrect = maxLengthCheck(30, firstName_);
@@ -165,7 +169,6 @@ bool RecordApp::validName(){
 }
 
 bool RecordApp::validOtherNames(){
-    std::system("clear");
     ifInsertingStringIsCorrect = true;
     ifInsertingStringIsCorrect = ifStringIsAlphabetChar(otherNames_);
     ifInsertingStringIsCorrect = maxLengthCheck(50, otherNames_);
@@ -173,7 +176,6 @@ bool RecordApp::validOtherNames(){
 }
 
 bool RecordApp::validEmail(){
-    std::system("clear");
     ifInsertingStringIsCorrect = true;
     auto countAt = std::count(email_.begin(), email_.end(), '@');
     auto countPoint = std::count(email_.begin(), email_.end(), '.');
@@ -185,7 +187,7 @@ bool RecordApp::validEmail(){
 }
 
 bool RecordApp::validTelephoneNumber(){
-    std::system("clear");
+
     ifInsertingStringIsCorrect = true;
     ifInsertingStringIsCorrect = maxLengthCheck(10, tel_);
     if (!std::all_of(tel_.begin(), tel_.end(), [](char i){return std::isdigit(i);})) {
@@ -196,7 +198,6 @@ bool RecordApp::validTelephoneNumber(){
 }
 
 bool RecordApp::validStreet(){
-    std::system("clear");
     ifInsertingStringIsCorrect = true;
     ifInsertingStringIsCorrect = ifStringIsAlphabetChar(street_);
     ifInsertingStringIsCorrect = maxLengthCheck(50, street_);
@@ -204,7 +205,6 @@ bool RecordApp::validStreet(){
 }
 
 bool RecordApp::validTown(){
-    std::system("clear");
     ifInsertingStringIsCorrect = true;
     ifInsertingStringIsCorrect = ifStringIsAlphabetChar(town_);
     ifInsertingStringIsCorrect = maxLengthCheck(30, town_);
@@ -212,7 +212,6 @@ bool RecordApp::validTown(){
 }
 
 bool RecordApp::validCountry(){
-    std::system("clear");
     ifInsertingStringIsCorrect = true;
     ifInsertingStringIsCorrect = ifStringIsAlphabetChar(country_);
     ifInsertingStringIsCorrect = maxLengthCheck(30, country_);
