@@ -5,16 +5,12 @@
 #include <iomanip>
 #include <cctype>
 #include <algorithm>
-#include <limits>
-#include <ios>
 
 
 void RecordApp::startApp(){
     std::system("clear");
     loadFromFile();
-    //std::cout << person_[0].getFirstName();
     menuAction();
-    //std::cout << "|      ---------------------------------------------------------------------------------------------------------------      |\n";
 }
 
 void RecordApp::printMenu(){
@@ -57,7 +53,6 @@ void RecordApp::menuAction(){
             } break;
         }
     } while (menuOption_ != MenuOption::exit);
-    //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 void RecordApp::addPerson(){
@@ -67,7 +62,7 @@ void RecordApp::addPerson(){
     addTelephoneNumber();
     addAddress();
     person_.push_back(Person(firstName_, otherNames_, email_, tel_, street_, town_, country_));
-    saveToFile(static_cast<int>(person_.size() - 1));
+    saveToFile(static_cast<int>(person_.size()) - 1);
     std::cout << "You added person.";
     std::cout << "\n               Name: " << firstName_ 
               << "\n               Other names: " << otherNames_
@@ -84,9 +79,9 @@ void RecordApp::searchPerson(){
 }
 
 void RecordApp::exitApp(){
-    for (int i = 0; i < static_cast<int>(person_.size()); i++){
-        saveToFile(i);
-    }
+    //for (int i = 0; i < static_cast<int>(person_.size()); i++){
+        resaveToFile();
+    //}
 }
 
 void RecordApp::addName(){
@@ -229,9 +224,6 @@ bool RecordApp::validCountry(){
 
 bool RecordApp::validValueToFind(){
 
-    // if (askIfStopSearch() == RecordApp::StateStatus::back){
-    //     return false;
-    // }
     return true;
 }
 
@@ -247,6 +239,24 @@ void RecordApp::saveToFile(int index){
     file << person_[index].getStreet() << "\n";
     file << person_[index].getTown() << "\n";
     file << person_[index].getCountry() << "\n\n";
+    file.close();
+}
+
+void RecordApp::resaveToFile(){
+    std::fstream file;
+    iterator_ = 1;
+    file.open("records.txt", std::ios::out | std::ios::trunc);
+    for (auto const& element : person_){
+        file << "[Person nr: " << iterator_ << "]\n";
+        file << element.getFirstName() << "\n";
+        file << element.getOthersName() << "\n";
+        file << element.getEmail() << "\n";
+        file << element.getTel() << "\n";
+        file << element.getStreet() << "\n";
+        file << element.getTown() << "\n";
+        file << element.getCountry() << "\n\n";
+        iterator_++;
+    }
     file.close();
 }
 
@@ -366,10 +376,8 @@ void RecordApp::menuActionSearch(){
             } break;
             default : {
                 std::cout << "Wrong value, choose again\n";
-                //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             } break;
         }
-        //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     } while (exitFromSearch_ != true);
 
@@ -379,7 +387,6 @@ void RecordApp::insertValueToSearch(){
     do{
         std::cout << "Search by "<< whatKindSearch_ << ". Please insert value to search:\n";
         std::cin >> insertValueToFind_ ;
-        //std::cout << insertValueToFind_ << "  <- insertValueToFind_    #####################################################    tab->  " << searchResult_.at(0).getFirstName();
     } while (validValueToFind() == false);
 }
 
@@ -391,7 +398,6 @@ void RecordApp::askIfStopSearch(){
             std::cout << "I can't find this value, what you wanna do: \n";
             std::cout << "1. Try insert again. \n";
             std::cout << "2. Back \n";
-            //std::cin.clear();
             std::cin >> result;
             stateStatus_ = static_cast<StateStatus>(result);
         }while (stateStatus_ != StateStatus::tryInsterAgain && stateStatus_ != StateStatus::back);
@@ -427,10 +433,7 @@ void RecordApp::searchByEmail(std::string email){
     searchResult_.clear();
     iterator_ = 0;
     for (auto const& element : person_){
-        //std::cout << element.getEmail() << "  <<------  INSIDE EMAIL SEARCH ----->" << email << "\n";
         if (element.getEmail() == email){
-            //std::cout << "INSIDE EMAIL SEARCH \n";
-            
             searchResult_.insert({iterator_, element});
         }
         iterator_++;
@@ -505,7 +508,6 @@ RecordApp::StateStatus RecordApp::actionAfterSearch(){
         std::cout << "2. Back: \n";
         std::cin >> chooseActionInPlayerSearch;
         stateStatus_ = static_cast<StateStatus>(chooseActionInPlayerSearch);
-        //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     } while (stateStatus_ != StateStatus::deleteItem && stateStatus_ != StateStatus::back);
     return stateStatus_;
 }

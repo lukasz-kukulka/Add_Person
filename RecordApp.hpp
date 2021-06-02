@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <map>
+#include <memory>
 
 #include "Person.hpp"
 
@@ -26,7 +27,7 @@ public:
         exit
     };
 
-        enum class StateStatus {
+    enum class StateStatus {
             back = 1,
             tryInsterAgain,
             deleteItem
@@ -62,6 +63,7 @@ private:
     bool maxLengthCheck(int, std::string);
 
     void saveToFile(int);
+    void resaveToFile();
     void loadFromFile();
     int countRecord();
     void printSearchMenu();
