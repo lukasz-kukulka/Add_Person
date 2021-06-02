@@ -273,8 +273,8 @@ void RecordApp::loadFromFile(){
             case 8: { country_= line; break;}   
         }
         lineNo++;
-        if (lineNo == 9){
-            lineNo = 2;
+        if (lineNo > 9){
+            lineNo = 1;
             person_.push_back(Person(firstName_, otherNames_, email_, tel_, street_, town_, country_));
         } 
 	}
@@ -425,10 +425,15 @@ void RecordApp::searchByOtherNames(std::string otherNames){
 
 void RecordApp::searchByEmail(std::string email){
     searchResult_.clear();
+    iterator_ = 0;
     for (auto const& element : person_){
+        //std::cout << element.getEmail() << "  <<------  INSIDE EMAIL SEARCH ----->" << email << "\n";
         if (element.getEmail() == email){
+            //std::cout << "INSIDE EMAIL SEARCH \n";
+            
             searchResult_.insert({iterator_, element});
         }
+        iterator_++;
     }
     askIfStopSearch();
 }
