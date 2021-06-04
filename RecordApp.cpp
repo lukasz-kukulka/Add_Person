@@ -512,4 +512,6 @@ RecordApp::StateStatus RecordApp::actionAfterSearch(){
     return stateStatus_;
 }
 
-
+void RecordApp::deleteRecord(){
+    
+}

@@ -66,6 +66,8 @@ private:
     void resaveToFile();
     void loadFromFile();
     int countRecord();
+    void deleteRecord();
+    
     void printSearchMenu();
     void menuActionSearch();
     void insertValueToSearch();
@@ -81,6 +83,7 @@ private:
     void printSearchPersons();
     StateStatus actionAfterSearch();
     void askIfStopSearch();
+    
 
 
     std::vector<Person>person_;
