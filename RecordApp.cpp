@@ -79,9 +79,18 @@ void RecordApp::searchPerson(){
 }
 
 void RecordApp::exitApp(){
-    //for (int i = 0; i < static_cast<int>(person_.size()); i++){
-        resaveToFile();
-    //}
+    std::string answer = "";
+    do {
+        std::cout << "Are you sure you wanna close the application? (Y/N) ";
+        std::cin >> answer;
+        if (answer == "Y" || answer == "y"){
+            resaveToFile();
+        } else if (answer != "N" && answer != "n"){
+            std::cout << "Wrong value, please try insert again\n";
+        }
+    } while (answer != "Y" && answer != "y" && answer != "N" && answer == "n");
+
+    
 }
 
 void RecordApp::addName(){
@@ -274,13 +283,34 @@ void RecordApp::loadFromFile(){
 	while (getline(file, line)){
        
         switch (lineNo){
-            case 2: { firstName_ = line; break;}
-            case 3: { otherNames_ = line; break;}
-            case 4: { email_ = line; break;}
-            case 5: { tel_ = line; break;}
-            case 6: { street_ = line; break;}
-            case 7: { town_ = line; break;}
-            case 8: { country_= line; break;}   
+            case 2: { 
+                firstName_ = line; 
+                break;
+                }
+            case 3: { 
+                otherNames_ = line; 
+                break;
+                }
+            case 4: { 
+                email_ = line; 
+                break;
+                }
+            case 5: { 
+                tel_ = line; 
+                break;
+                }
+            case 6: { 
+                street_ = line; 
+                break;
+                }
+            case 7: { 
+                town_ = line; 
+                break;
+                }
+            case 8: { 
+                country_= line; 
+                break;
+                }   
         }
         lineNo++;
         if (lineNo > 9){
@@ -521,7 +551,6 @@ RecordApp::StateStatus RecordApp::actionAfterSearch(){
 void RecordApp::deleteRecord(){
     std::string answer = "";
     if (actionAfterSearch() == StateStatus::deleteItem){
-        //std::cout << "---------------------------------------------" <<  answer;
         do {
             std::cout << "Are you sure you wanna delete this record? (Y/N) ";
             std::cin >> answer;
