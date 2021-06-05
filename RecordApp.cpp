@@ -507,7 +507,13 @@ RecordApp::StateStatus RecordApp::actionAfterSearch(){
         std::cout << "1. Delete: \n";
         std::cout << "2. Back: \n";
         std::cin >> chooseActionInPlayerSearch;
-        stateStatus_ = static_cast<StateStatus>(chooseActionInPlayerSearch);
+        if (chooseActionInPlayerSearch == 1){
+            stateStatus_ = StateStatus::deleteItem;
+        } else if (chooseActionInPlayerSearch == 2){
+            stateStatus_ = StateStatus::back;
+        } else {
+            std::cout << "Wrong value!\n";
+        }
     } while (stateStatus_ != StateStatus::deleteItem && stateStatus_ != StateStatus::back);
     return stateStatus_;
 }
@@ -515,6 +521,7 @@ RecordApp::StateStatus RecordApp::actionAfterSearch(){
 void RecordApp::deleteRecord(){
     std::string answer = "";
     if (actionAfterSearch() == StateStatus::deleteItem){
+        std::cout << "---------------------------------------------" <<  answer;
         do {
             std::cout << "Are you sure you wanna delete this record? (Y/N) ";
             std::cin >> answer;
