@@ -521,16 +521,16 @@ RecordApp::StateStatus RecordApp::actionAfterSearch(){
 void RecordApp::deleteRecord(){
     std::string answer = "";
     if (actionAfterSearch() == StateStatus::deleteItem){
-        std::cout << "---------------------------------------------" <<  answer;
+        //std::cout << "---------------------------------------------" <<  answer;
         do {
             std::cout << "Are you sure you wanna delete this record? (Y/N) ";
             std::cin >> answer;
             if (answer == "Y" || answer == "y"){
-                person_.erase(person_.begin() + selectPerson_ - 1);
+                person_.erase(person_.begin() + selectPerson_);
                 std::cout << "Item is deleted\n";
             } else if (answer != "N" && answer != "n"){
                 std::cout << "Wrong value, please try insert again\n";
             }
-        } while (answer == "Y" || answer == "y" || answer == "N" || answer == "n");
+        } while (answer != "Y" && answer != "y" && answer != "N" && answer == "n");
     }
 }
